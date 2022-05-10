@@ -1,0 +1,59 @@
+<div id="container">
+  <!-- populated by JS-->
+</div>
+<script src="./bostonData.js"></script>
+<script>
+function renderPosts(bostonData, container) {
+  const people = bostonData.data;
+  const len = bostonData.data.length;
+  let html = '';
+  for (let i = 0; i < len; i++) {
+    html +=
+      '<li class="post">' + '<h2>' + people[i][8] + '</h2>' + '<h3>' + people[i][11] + '</h3>';
+  }
+
+  // TODO: add code to display the html variable inside a ul element with id="data"
+  // Hint: you can use the container parameter's innerHTML property to insert Html tags
+  container.innerHTML = '<ul id= "data">' + html + '</ul>';
+}
+  function renderTopSalaries(bostonData, container) {
+    const people = bostonData.data;
+    var TopSalaries = people.sort((a,b)=> b[11]-a[11]).slice(0,5);
+    const len = TopSalaries.length;
+    let html = '';
+    for (let i = 0; i < len; i++) {
+      html +=
+        '<li class="post">' +
+        '<h2>' +
+        TopSalaries[i][8] +
+        '</h2>' +
+        '<h3>' +
+        TopSalaries[i][11] +
+        '</h3>';
+    }
+    container.innerHTML = '<ul id= "data">' + html + '</ul>';
+  }
+
+  function renderTopEmployees(bostonData, container) {
+    const people = bostonData.data;
+    const topEmployees = people.filter((a) => a[11] > 200000);
+    const len = topEmployees.length;
+    let html = '';
+    for(let i = 0; i < len; i++) {
+      html +=
+        '<li class="top">' +
+        '<h2>' +
+        topEmployees[i][8] +
+        '</h2>' +
+        '<h3>' +
+        topEmployees[i][11] +
+        '</h3>';
+    }
+    container.innerHTML += '<ul id= "topEmployees">' + html + '</ul>';
+  }
+
+  renderTopSalaries(bostonData, document.getElementById('container'));
+ //renderTopEmployees(bostonData, document.getElementById('container'));
+  //renderPosts(bostonData, document.getElementById('container'));
+
+</script>
